@@ -4,6 +4,8 @@ import io.github.booknet.facade.Facade;
 import io.github.booknet.models.Avaliacao;
 import io.github.booknet.models.Livro;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,10 @@ public class LivroController {
                responses = {
                     @ApiResponse(responseCode = "200", description = "Livros listados com sucesso"),
                     @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+
+               },
+               parameters = {
+                    @Parameter(name = "id", description = "ID do livro a ser recuperado", example = "1", in = ParameterIn.PATH, required = true)
 
                }
     )
@@ -68,6 +74,10 @@ public class LivroController {
                     @ApiResponse(responseCode = "200", description = "Livro atualizado com sucesso"),
                     @ApiResponse(responseCode = "404", description = "Livro não encontrado"),
                     @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+               },
+               parameters = {
+                       @Parameter(name = "livro", description = "Livro a ser atualizado", required = true)
+
                }
     )
     public Livro atualizarLivro(@RequestBody Livro livro) {
